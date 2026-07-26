@@ -1,0 +1,511 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: #F9F9F9;
+  --color-foreground: #1A1A1A;
+  --color-accent: var(--color-orange-500);
+  --color-accent-light: var(--color-orange-400);
+  --color-card: #EFEFEF;
+}
+
+/* ========= Brand Accent =========
+   --color-orange-500 is the single source of truth for the site's brand
+   color (set from Admin → Settings, or overridden here for a permanent
+   change). Every other orange-* shade — and therefore every bg-orange-*,
+   text-orange-*, border-orange-*, gradient-orange-* utility class and the
+   gold-* helpers below — is derived from it, so changing one variable
+   re-colors the whole site. */
+:root {
+  --color-orange-50:  color-mix(in oklab, var(--color-orange-500) 10%, white);
+  --color-orange-100: color-mix(in oklab, var(--color-orange-500) 20%, white);
+  --color-orange-200: color-mix(in oklab, var(--color-orange-500) 40%, white);
+  --color-orange-300: color-mix(in oklab, var(--color-orange-500) 65%, white);
+  --color-orange-400: color-mix(in oklab, var(--color-orange-500) 85%, white);
+  --color-orange-600: color-mix(in oklab, var(--color-orange-500) 88%, black);
+  --color-orange-700: color-mix(in oklab, var(--color-orange-500) 74%, black);
+  --color-orange-800: color-mix(in oklab, var(--color-orange-500) 60%, black);
+  --color-orange-900: color-mix(in oklab, var(--color-orange-500) 50%, black);
+  --color-orange-950: color-mix(in oklab, var(--color-orange-500) 32%, black);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #F9F9F9;
+  color: #1A1A1A;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #E5E5E5; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--color-orange-500), var(--color-orange-400));
+  border-radius: 2px;
+}
+
+/* ========= Glass Morphism ========= */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+.glass-gold {
+  background: color-mix(in oklab, var(--color-orange-500) 6%, transparent);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid color-mix(in oklab, var(--color-orange-500) 18%, transparent);
+}
+.glass-dark {
+  background: rgba(239, 239, 239, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+}
+.glass-nav {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(28px) saturate(1.6);
+  -webkit-backdrop-filter: blur(28px) saturate(1.6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 2px 32px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255,255,255,0.18);
+}
+.glass-nav-scrolled {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(28px) saturate(1.8);
+  -webkit-backdrop-filter: blur(28px) saturate(1.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07), inset 0 1px 0 rgba(255,255,255,0.5);
+}
+
+/* ========= Orange Gradient Utilities ========= */
+.gold-text {
+  background: linear-gradient(135deg, var(--color-orange-600), var(--color-orange-500), var(--color-orange-400));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.gold-gradient {
+  background: linear-gradient(135deg, var(--color-orange-500), var(--color-orange-600));
+}
+.gold-gradient-hover:hover {
+  background: linear-gradient(135deg, var(--color-orange-600), var(--color-orange-700));
+}
+.gold-glow {
+  box-shadow: 0 0 30px color-mix(in oklab, var(--color-orange-500) 25%, transparent),
+              0 0 60px color-mix(in oklab, var(--color-orange-500) 10%, transparent);
+}
+.gold-border { border-color: color-mix(in oklab, var(--color-orange-500) 35%, transparent); }
+
+/* ========= Stone / Light Texture Background ========= */
+.granite-bg {
+  background-color: #F9F9F9;
+  background-image:
+    radial-gradient(ellipse at 20% 50%, color-mix(in oklab, var(--color-orange-500) 6%, transparent) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, color-mix(in oklab, var(--color-orange-600) 4%, transparent) 0%, transparent 50%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+}
+
+/* ========= Card Hover ========= */
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in oklab, var(--color-orange-500) 40%, transparent) !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08), 0 0 30px color-mix(in oklab, var(--color-orange-500) 12%, transparent);
+}
+
+/* ========= Stone Pattern Grid ========= */
+.stone-grid {
+  background-image:
+    linear-gradient(color-mix(in oklab, var(--color-orange-500) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, var(--color-orange-500) 6%, transparent) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ========= Section Badge ========= */
+.section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: color-mix(in oklab, var(--color-orange-500) 10%, transparent);
+  border: 1px solid color-mix(in oklab, var(--color-orange-500) 25%, transparent);
+  color: var(--color-orange-600);
+}
+
+/* ========= Input Styles ========= */
+.input-dark {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 10px;
+  padding: 12px 16px;
+  color: #1A1A1A;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%;
+  font-size: 0.95rem;
+}
+.input-dark::placeholder { color: rgba(26, 26, 26, 0.35); }
+.input-dark:focus {
+  border-color: color-mix(in oklab, var(--color-orange-500) 50%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-orange-500) 10%, transparent);
+}
+.input-dark option { background: #EFEFEF; color: #1A1A1A; }
+
+/* ========= Autofill override — kills browser blue/yellow fill ========= */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #1A1A1A;
+  -webkit-box-shadow: 0 0 0px 1000px rgba(255,255,255,0.8) inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+.login-input:-webkit-autofill,
+.login-input:-webkit-autofill:hover,
+.login-input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #ffffff;
+  -webkit-box-shadow: 0 0 0px 1000px rgba(20,26,36,0.98) inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* ========= Animations ========= */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes pulse-gold {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.05); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.float-anim { animation: float 6s ease-in-out infinite; }
+.float-delay { animation: float 6s ease-in-out 2s infinite; }
+.pulse-gold-anim { animation: pulse-gold 4s ease-in-out infinite; }
+.pulse-gold-delay { animation: pulse-gold 4s ease-in-out 2s infinite; }
+
+/* ========= Hero Dark Granite Background ========= */
+.granite-hero-bg {
+  background-color: #0a0a0a;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='700' height='700'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.68' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='0.35' intercept='0.06'/%3E%3CfeFuncG type='linear' slope='0.32' intercept='0.05'/%3E%3CfeFuncB type='linear' slope='0.28' intercept='0.04'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='700' height='700' filter='url(%23g)'/%3E%3C/svg%3E"),
+    linear-gradient(160deg, #111010 0%, #1a1512 25%, #0f0e0c 50%, #161210 75%, #0a0a0a 100%);
+  background-size: 700px 700px, cover;
+}
+
+/* Gold vein overlay */
+.granite-vein-overlay {
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='900'%3E%3Cfilter id='v'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.018 0.06' numOctaves='3' seed='7'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.98 0 0 0 0 0.72 0 0 0 0 0.13 0 0 0 5 -2.5'/%3E%3C/filter%3E%3Crect width='900' height='900' filter='url(%23v)' opacity='0.18'/%3E%3C/svg%3E");
+  background-size: 900px 900px;
+}
+
+/* Hero grid (white lines on dark) */
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 70px 70px;
+}
+
+/* ── Ken Burns ── */
+@keyframes kenBurns {
+  0%   { transform: scale(1.0) translate(0%, 0%); }
+  25%  { transform: scale(1.07) translate(-0.8%, -0.6%); }
+  50%  { transform: scale(1.05) translate(0.4%, -1%); }
+  75%  { transform: scale(1.08) translate(-0.3%, 0.5%); }
+  100% { transform: scale(1.0) translate(0%, 0%); }
+}
+.ken-burns {
+  animation: kenBurns 28s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* ── Light sweep ── */
+@keyframes lightSweep {
+  0%   { transform: translateX(-200px) skewX(-18deg); opacity: 0; }
+  8%   { opacity: 1; }
+  92%  { opacity: 1; }
+  100% { transform: translateX(calc(100vw + 200px)) skewX(-18deg); opacity: 0; }
+}
+.light-sweep {
+  animation: lightSweep 12s linear infinite;
+  animation-delay: 1.5s;
+}
+
+/* ── Glow pulse on gold orbs ── */
+@keyframes heroOrb {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50%       { opacity: 0.85; transform: scale(1.12); }
+}
+.hero-orb-1 { animation: heroOrb 7s ease-in-out infinite; }
+.hero-orb-2 { animation: heroOrb 9s ease-in-out 3s infinite; }
+.hero-orb-3 { animation: heroOrb 11s ease-in-out 6s infinite; }
+
+/* ── New ambient orbs (navy/indigo + orange) ── */
+@keyframes heroOrbA {
+  0%, 100% { opacity: 0.55; transform: scale(1) translate(0,0); }
+  50%       { opacity: 0.9;  transform: scale(1.1) translate(-1%, 1%); }
+}
+@keyframes heroOrbB {
+  0%, 100% { opacity: 0.6;  transform: scale(1) translate(0,0); }
+  50%       { opacity: 0.95; transform: scale(1.08) translate(1%, -0.8%); }
+}
+@keyframes heroOrbC {
+  0%, 100% { opacity: 0.4;  transform: scale(1); }
+  50%       { opacity: 0.7;  transform: scale(1.15); }
+}
+.hero-orb-a { animation: heroOrbA 8s ease-in-out infinite; }
+.hero-orb-b { animation: heroOrbB 10s ease-in-out 2s infinite; }
+.hero-orb-c { animation: heroOrbC 13s ease-in-out 5s infinite; }
+
+/* ── Marble-dark background (navy-to-stone) ── */
+.marble-dark-bg {
+  background-color: #080c18;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='800'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='5' seed='12' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.05 0 0 0 0 0.07 0 0 0 0 0.14 0 0 0 18 -6'/%3E%3C/filter%3E%3Crect width='800' height='800' filter='url(%23m)'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cfilter id='v2'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.02 0.05' numOctaves='3' seed='3'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.38 0 0 0 0 0.28 0 0 0 0 0.05 0 0 0 4 -2'/%3E%3C/filter%3E%3Crect width='600' height='600' filter='url(%23v2)' opacity='0.14'/%3E%3C/svg%3E"),
+    linear-gradient(135deg, #080c18 0%, #0c0e0b 45%, #110a0c 100%);
+  background-size: 800px 800px, 600px 600px, cover;
+}
+
+/* ── Hexagonal/diamond grid ── */
+.hero-hex-grid {
+  background-image:
+    linear-gradient(30deg, rgba(99,102,241,0.04) 1px, transparent 1px),
+    linear-gradient(150deg, rgba(99,102,241,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, var(--color-orange-500) 2.5%, transparent) 1px, transparent 1px);
+  background-size: 60px 104px, 60px 104px, 60px 104px;
+}
+
+/* ========= Admin Sidebar ========= */
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  color: #6B7280;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+.sidebar-item:hover {
+  background: color-mix(in oklab, var(--color-orange-500) 8%, transparent);
+  color: #1A1A1A;
+  border-color: color-mix(in oklab, var(--color-orange-500) 15%, transparent);
+}
+.sidebar-item.active {
+  background: color-mix(in oklab, var(--color-orange-500) 12%, transparent);
+  color: var(--color-orange-600);
+  border-color: color-mix(in oklab, var(--color-orange-500) 25%, transparent);
+}
+
+/* ========= Status badges ========= */
+.status-pending   { background: rgba(251,191,36,0.1);  color: #B45309; border: 1px solid rgba(251,191,36,0.3); }
+.status-processing{ background: rgba(59,130,246,0.1);  color: #1D4ED8; border: 1px solid rgba(59,130,246,0.3); }
+.status-completed { background: rgba(34,197,94,0.1);   color: #15803D; border: 1px solid rgba(34,197,94,0.3); }
+.status-delivered { background: rgba(168,85,247,0.1);  color: #7E22CE; border: 1px solid rgba(168,85,247,0.3); }
+
+/* ========= Table ========= */
+.admin-table { width: 100%; border-collapse: collapse; }
+.admin-table th {
+  background: rgba(0,0,0,0.03);
+  color: #6B7280;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+}
+.admin-table td {
+  padding: 14px 16px;
+  font-size: 0.9rem;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  vertical-align: middle;
+}
+.admin-table tr:hover td { background: rgba(0,0,0,0.02); }
+
+/* ========= Admin Mobile Top Bar ========= */
+.admin-mobile-bar {
+  background: rgba(240, 240, 240, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* ========= Admin Dark Mode ========= */
+[data-admin-theme="dark"] {
+  background-color: #0D1117;
+  color: #E6EDF3;
+}
+
+/* Sidebar & surfaces */
+[data-admin-theme="dark"] aside,
+[data-admin-theme="dark"] .admin-mobile-bar {
+  background-color: #161B22 !important;
+  border-color: rgba(240,246,252,0.08) !important;
+}
+
+/* White cards → dark surface */
+[data-admin-theme="dark"] .bg-white {
+  background-color: #1C2128 !important;
+}
+
+/* Page background */
+[data-admin-theme="dark"].admin-root,
+[data-admin-theme="dark"] .bg-\[#F9F9F9\] {
+  background-color: #0D1117 !important;
+}
+
+/* Text */
+[data-admin-theme="dark"] .text-gray-900 { color: #E6EDF3 !important; }
+[data-admin-theme="dark"] .text-gray-800 { color: #CDD9E5 !important; }
+[data-admin-theme="dark"] .text-gray-700 { color: #8D96A0 !important; }
+[data-admin-theme="dark"] .text-gray-600 { color: #8B949E !important; }
+[data-admin-theme="dark"] .text-gray-500 { color: #6E7681 !important; }
+[data-admin-theme="dark"] .text-gray-400 { color: #6E7681 !important; }
+
+/* Borders */
+[data-admin-theme="dark"] .border-gray-200 { border-color: rgba(240,246,252,0.1) !important; }
+[data-admin-theme="dark"] .border-gray-100 { border-color: rgba(240,246,252,0.07) !important; }
+[data-admin-theme="dark"] .border-black\/\[0\.07\] { border-color: rgba(255,255,255,0.07) !important; }
+[data-admin-theme="dark"] .border-black\/\[0\.08\] { border-color: rgba(255,255,255,0.08) !important; }
+
+/* Inputs */
+[data-admin-theme="dark"] input[type="text"],
+[data-admin-theme="dark"] input[type="email"],
+[data-admin-theme="dark"] input[type="tel"],
+[data-admin-theme="dark"] input[type="number"],
+[data-admin-theme="dark"] textarea,
+[data-admin-theme="dark"] select {
+  background-color: #21262D !important;
+  border-color: rgba(240,246,252,0.1) !important;
+  color: #E6EDF3 !important;
+}
+[data-admin-theme="dark"] input::placeholder,
+[data-admin-theme="dark"] textarea::placeholder { color: #6E7681 !important; }
+
+/* Sidebar items in dark */
+[data-admin-theme="dark"] .sidebar-item { color: #8B949E !important; }
+[data-admin-theme="dark"] .sidebar-item:hover {
+  background: color-mix(in oklab, var(--color-orange-500) 10%, transparent) !important;
+  color: #E6EDF3 !important;
+  border-color: color-mix(in oklab, var(--color-orange-500) 20%, transparent) !important;
+}
+[data-admin-theme="dark"] .sidebar-item.active {
+  background: color-mix(in oklab, var(--color-orange-500) 15%, transparent) !important;
+  color: var(--color-orange-500) !important;
+  border-color: color-mix(in oklab, var(--color-orange-500) 30%, transparent) !important;
+}
+
+/* Section card header tints in dark */
+[data-admin-theme="dark"] .bg-orange-50  { background-color: color-mix(in oklab, var(--color-orange-500) 10%, transparent) !important; }
+[data-admin-theme="dark"] .bg-blue-50    { background-color: rgba(59,130,246,0.08) !important; }
+[data-admin-theme="dark"] .bg-green-50   { background-color: rgba(34,197,94,0.08) !important; }
+[data-admin-theme="dark"] .bg-purple-50  { background-color: rgba(168,85,247,0.08) !important; }
+[data-admin-theme="dark"] .bg-gray-50    { background-color: rgba(255,255,255,0.04) !important; }
+[data-admin-theme="dark"] .bg-white\/60  { background-color: rgba(255,255,255,0.08) !important; }
+
+/* Shadows */
+[data-admin-theme="dark"] .shadow-sm { box-shadow: 0 1px 3px rgba(0,0,0,0.4) !important; }
+[data-admin-theme="dark"] .shadow-md { box-shadow: 0 4px 8px rgba(0,0,0,0.4) !important; }
+
+/* Admin table */
+[data-admin-theme="dark"] .admin-table th {
+  background: rgba(255,255,255,0.04) !important;
+  color: #6E7681 !important;
+  border-color: rgba(240,246,252,0.07) !important;
+}
+[data-admin-theme="dark"] .admin-table td { border-color: rgba(240,246,252,0.05) !important; }
+[data-admin-theme="dark"] .admin-table tr:hover td { background: rgba(255,255,255,0.03) !important; }
+
+/* Status badges dark */
+[data-admin-theme="dark"] .status-pending    { background: rgba(251,191,36,0.12); color: #FBBF24; border-color: rgba(251,191,36,0.25); }
+[data-admin-theme="dark"] .status-processing { background: rgba(59,130,246,0.12); color: #60A5FA; border-color: rgba(59,130,246,0.25); }
+[data-admin-theme="dark"] .status-completed  { background: rgba(34,197,94,0.12);  color: #4ADE80; border-color: rgba(34,197,94,0.25); }
+[data-admin-theme="dark"] .status-delivered  { background: rgba(168,85,247,0.12); color: #C084FC; border-color: rgba(168,85,247,0.25); }
+
+/* Upload drop zone dark */
+[data-admin-theme="dark"] .border-dashed { border-color: rgba(240,246,252,0.15) !important; }
+
+/* Theme toggle button dark border */
+[data-admin-theme="dark"] .border-gray-200.rounded-xl {
+  border-color: rgba(240,246,252,0.1) !important;
+}
+[data-admin-theme="dark"] .hover\:border-orange-300:hover  { border-color: color-mix(in oklab, var(--color-orange-500) 40%, transparent) !important; }
+[data-admin-theme="dark"] .hover\:bg-orange-50:hover       { background-color: color-mix(in oklab, var(--color-orange-500) 10%, transparent) !important; }
+[data-admin-theme="dark"] .hover\:bg-orange-50\/30:hover   { background-color: color-mix(in oklab, var(--color-orange-500) 5%, transparent) !important; }
+[data-admin-theme="dark"] .hover\:bg-orange-100:hover      { background-color: color-mix(in oklab, var(--color-orange-500) 15%, transparent) !important; }
+[data-admin-theme="dark"] .hover\:bg-gray-200:hover        { background-color: rgba(255,255,255,0.1) !important; }
+[data-admin-theme="dark"] .hover\:text-gray-900:hover      { color: #E6EDF3 !important; }
+[data-admin-theme="dark"] .hover\:bg-black\/\[0\.06\]:hover { background-color: rgba(255,255,255,0.06) !important; }
+[data-admin-theme="dark"] .hover\:bg-orange-50.transition-colors { background-color: color-mix(in oklab, var(--color-orange-500) 10%, transparent) !important; }
+[data-admin-theme="dark"] .divide-gray-50 > * + * { border-color: rgba(240,246,252,0.06) !important; }
+
+/* Scrollbar dark */
+[data-admin-theme="dark"] ::-webkit-scrollbar-track { background: #161B22; }
+
+/* Glass components in dark */
+[data-admin-theme="dark"] .glass {
+  background: rgba(28, 33, 40, 0.85) !important;
+  border-color: rgba(240,246,252,0.08) !important;
+}
+[data-admin-theme="dark"] .glass-dark {
+  background: rgba(22, 27, 34, 0.9) !important;
+  border-color: rgba(240,246,252,0.07) !important;
+}
+
+/* Missing colour tints */
+[data-admin-theme="dark"] .bg-amber-50  { background-color: rgba(251,191,36,0.08) !important; }
+[data-admin-theme="dark"] .bg-red-50    { background-color: rgba(239,68,68,0.08)  !important; }
+[data-admin-theme="dark"] .bg-gray-100  { background-color: rgba(255,255,255,0.06) !important; }
+[data-admin-theme="dark"] .bg-gray-200  { background-color: rgba(255,255,255,0.08) !important; }
+
+/* Text colours missed */
+[data-admin-theme="dark"] .text-amber-600 { color: #FCD34D !important; }
+[data-admin-theme="dark"] .text-amber-700 { color: #FBBF24 !important; }
+[data-admin-theme="dark"] .text-blue-600  { color: #60A5FA !important; }
+[data-admin-theme="dark"] .text-blue-700  { color: #93C5FD !important; }
+[data-admin-theme="dark"] .text-green-600 { color: #4ADE80 !important; }
+[data-admin-theme="dark"] .text-green-700 { color: #86EFAC !important; }
+[data-admin-theme="dark"] .text-purple-700 { color: #C084FC !important; }
+[data-admin-theme="dark"] .text-orange-700 { color: var(--color-orange-400) !important; }
+[data-admin-theme="dark"] .text-red-600   { color: #F87171 !important; }
+
+/* .input-dark in dark mode */
+[data-admin-theme="dark"] .input-dark {
+  background: rgba(255,255,255,0.05) !important;
+  border-color: rgba(240,246,252,0.12) !important;
+  color: #E6EDF3 !important;
+}
+[data-admin-theme="dark"] .input-dark::placeholder { color: rgba(230,237,243,0.3) !important; }
+[data-admin-theme="dark"] .input-dark option { background: #1C2128 !important; color: #E6EDF3 !important; }
+
+/* Dropdown / popup surfaces */
+[data-admin-theme="dark"] .shadow-xl.bg-white,
+[data-admin-theme="dark"] .shadow-xl.rounded-xl { background-color: #1C2128 !important; }
+[data-admin-theme="dark"] .hover\:bg-gray-50:hover { background-color: rgba(255,255,255,0.06) !important; }
+

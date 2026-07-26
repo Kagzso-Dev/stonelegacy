@@ -1,0 +1,47 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node src/seed-data.js)",
+      "Bash(node -e \"let d='';process.stdin.on\\('data',c=>d+=c\\).on\\('end',\\(\\)=>{const j=JSON.parse\\(d\\);console.log\\(j.error?'FAIL: '+d:'PASS — '+j.username+' / '+j.role\\)}\\)\")",
+      "Bash(curl -s http://localhost:5000/api/products)",
+      "Bash(node -e \"let d='';process.stdin.on\\('data',c=>d+=c\\).on\\('end',\\(\\)=>{const j=JSON.parse\\(d\\);console.log\\(Array.isArray\\(j\\)?'PASS — '+j.length+' products':'FAIL: '+d\\)}\\)\")",
+      "Bash(curl -s http://localhost:5000/api/gallery)",
+      "Bash(node -e \"let d='';process.stdin.on\\('data',c=>d+=c\\).on\\('end',\\(\\)=>{const j=JSON.parse\\(d\\);console.log\\(Array.isArray\\(j\\)?'PASS — '+j.length+' messages':'FAIL: '+d\\)}\\)\")",
+      "Bash(curl -s http://localhost:5000/api/settings)",
+      "Bash(node -e \"let d='';process.stdin.on\\('data',c=>d+=c\\).on\\('end',\\(\\)=>{const j=JSON.parse\\(d\\);console.log\\(j.companyName?'PASS — '+j.companyName:'FAIL: '+d\\)}\\)\")",
+      "Bash(curl -s -X POST http://localhost:5000/api/messages -H 'Content-Type: application/json' -d '{\"name\":\"Test\",\"email\":\"t@t.com\",\"phone\":\"9999999999\",\"subject\":\"Test\",\"message\":\"System check message\"}')",
+      "Bash(node -e \"let d='';process.stdin.on\\('data',c=>d+=c\\).on\\('end',\\(\\)=>{const j=JSON.parse\\(d\\);console.log\\(j.orders?'PASS — '+j.total+' pending':'FAIL: '+d\\)}\\)\")",
+      "Bash(curl -s \"http://localhost:5000/api/products?category=granite\")",
+      "Bash(node -e \"let d='';process.stdin.on\\('data',c=>d+=c\\).on\\('end',\\(\\)=>{const j=JSON.parse\\(d\\);console.log\\(Array.isArray\\(j\\)?'PASS — '+j.length+' granite products':'FAIL: '+d\\)}\\)\")",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\" http://localhost:8006)",
+      "Bash(node src/server.js)",
+      "Bash(echo \"Backend PID: $!\")",
+      "Bash(sleep 3 && cat /tmp/backend.log)",
+      "Read(//tmp/**)",
+      "Bash(npm run *)",
+      "Bash(echo \"Frontend PID: $!\")",
+      "Bash(sleep 8 && cat /tmp/frontend.log)",
+      "Bash(node -e \"let d='';process.stdin.on\\('data',c=>d+=c\\).on\\('end',\\(\\)=>{const j=JSON.parse\\(d\\);console.log\\('id:'+j.id+' orderNumber:'+j.orderNumber+' status:'+j.status\\)}\\)\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8006/admin/login)",
+      "PowerShell(curl http://localhost:5000/api/settings 2>&1)",
+      "PowerShell(Invoke-RestMethod -Uri \"http://localhost:5000/api/settings\" -Method GET -ErrorAction SilentlyContinue)",
+      "PowerShell(netstat -ano)",
+      "PowerShell(taskkill /PID 19768 /F)",
+      "PowerShell(taskkill /PID 24312 /F)",
+      "PowerShell(taskkill /PID 31428 /F)",
+      "PowerShell(taskkill /PID 20880 /F)",
+      "PowerShell(taskkill /PID 28424 /F)",
+      "PowerShell(taskkill /PID 9300 /F)",
+      "PowerShell(Invoke-WebRequest -Uri \"https://images.unsplash.com/photo-ApkZ5RTza5g?w=1920&q=85&fit=crop\" -OutFile \"c:\\\\projects\\\\stonelegacy\\\\public\\\\images\\\\donor-walkways.jpg\" -UseBasicParsing)",
+      "PowerShell(Get-ChildItem \"c:\\\\projects\\\\stonelegacy\\\\public\\\\images\\\\\" | Select-Object Name, @{N='KB';E={[math]::Round\\($_.Length/1KB\\)}})",
+      "PowerShell(Invoke-RestMethod \"http://localhost:5000/api/health\")",
+      "PowerShell(Invoke-RestMethod \"http://localhost:5000/api/settings\")",
+      "PowerShell(taskkill /PID 11092 /F)",
+      "Bash(powershell -Command \"\\(Get-Content app\\\\admin\\\\messages\\\\page.tsx\\) -replace 'className=\\\\\"p-6 lg:p-8 h-screen flex flex-col\\\\\"', 'className=\\\\\"p-4 sm:p-6 lg:p-8 h-[calc\\(100vh-4rem\\)] lg:h-screen flex flex-col\\\\\"' | Set-Content app\\\\admin\\\\messages\\\\page.tsx -Encoding utf8; \\(Get-Content app\\\\admin\\\\gallery\\\\page.tsx\\) -replace 'className=\\\\\"p-6 lg:p-8 space-y-6\\\\\"', 'className=\\\\\"p-4 sm:p-6 lg:p-8 space-y-5 sm:space-y-6\\\\\"' | Set-Content app\\\\admin\\\\gallery\\\\page.tsx -Encoding utf8; \\(Get-Content app\\\\admin\\\\engraving-methods\\\\page.tsx\\) -replace 'className=\\\\\"p-6 lg:p-8 space-y-6\\\\\"', 'className=\\\\\"p-4 sm:p-6 lg:p-8 space-y-5 sm:space-y-6\\\\\"' | Set-Content app\\\\admin\\\\engraving-methods\\\\page.tsx -Encoding utf8; \\(Get-Content app\\\\admin\\\\orders\\\\page.tsx\\) -replace 'className=\\\\\"p-6 lg:p-8 space-y-6\\\\\"', 'className=\\\\\"p-4 sm:p-6 lg:p-8 space-y-5 sm:space-y-6\\\\\"' | Set-Content app\\\\admin\\\\orders\\\\page.tsx -Encoding utf8; \\(Get-Content app\\\\admin\\\\products\\\\page.tsx\\) -replace 'className=\\\\\"p-6 lg:p-8 space-y-6\\\\\"', 'className=\\\\\"p-4 sm:p-6 lg:p-8 space-y-5 sm:space-y-6\\\\\"' | Set-Content app\\\\admin\\\\products\\\\page.tsx -Encoding utf8; \\(Get-Content app\\\\admin\\\\analytics\\\\page.tsx\\) -replace 'className=\\\\\"p-6 lg:p-8 space-y-8\\\\\"', 'className=\\\\\"p-4 sm:p-6 lg:p-8 space-y-6 sm:space-y-8\\\\\"' | Set-Content app\\\\admin\\\\analytics\\\\page.tsx -Encoding utf8\")",
+      "Bash(npx next *)"
+    ],
+    "additionalDirectories": [
+      "c:\\projects\\stonelegacy\\public"
+    ]
+  }
+}
